@@ -1,0 +1,61 @@
+name: Browser Extension Build
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+  # Allows running this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  manifestinfo:
+    name: Get Extension Info
+    runs-on: ubuntu-20.04
+    outputs: 
+      version: ${{ steps.ExtensionVersion.outputs.version }}
+      name: ${{ steps.ExtensionName.outputs.name }}
+    
+    steps:
+      - id: checkout
+        uses: actions/checkout@v2
+
+      - id: ExtensionVersion
+        name: Get Extension Version
+        run: |
+          jq -r .version manifest.json
+          value=$(jq -r .version manifest.json)
+          echo "::set-output name=version::$value"
+
+      - id: ExtensionName
+        name: Get Extension Name
+        run: |
+          jq -r .name manifest.json
+          value=$(jq -r .name manifest.json | sed 's/ /-/')
+          echo "::set-output name=name::$value"
+
+  build:
+    name: Build Extension
+    runs-on: ubuntu-20.04
+    needs: manifestinfo
+    steps:
+    - id: checkout
+      uses: actions/checkout@v2
+
+    - id: build
+      name: Collect Extension Files
+      run: |
+        mkdir export
+        cd export
+        cp -r ../icons .
+        cp ../*.js* .
+
+    - id: publish-artifact
+      name: Artifact Upload
+      uses: actions/upload-artifact@v2
+      with:
+        name: ${{needs.manifestinfo.outputs.name}}-${{needs.manifestinfo.outputs.version}}
+        path: export/
+
+        
