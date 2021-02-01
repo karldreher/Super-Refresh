@@ -57,7 +57,7 @@ jobs:
       run: |
         mkdir export
         cd export
-        cp -r ../icons .
+        cp ../icons/*.png .
         cp ../*.js* .
 
     - id: publish-artifact
