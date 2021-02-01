@@ -50,7 +50,7 @@ jobs:
         convert icon-128.png -resize 48x48 icon-48.png
         convert icon-128.png -resize 16x16 icon-16.png
       
-      working_directory: ./icons
+      working-directory: ./icons
 
     - id: build
       name: Collect Extension Files
