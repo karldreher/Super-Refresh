@@ -43,12 +43,21 @@ jobs:
     - id: checkout
       uses: actions/checkout@v2
 
+    - id: icons
+      name: Create Icon Set
+      run: |
+        convert icon-128.png -resize 32x32 icon-32.png
+        convert icon-128.png -resize 48x48 icon-48.png
+        convert icon-128.png -resize 16x16 icon-16.png
+      
+      working-directory: ./icons
+
     - id: build
       name: Collect Extension Files
       run: |
         mkdir export
         cd export
-        cp -r ../icons .
+        cp ../icons/*.png .
         cp ../*.js* .
 
     - id: publish-artifact
