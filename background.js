@@ -1,4 +1,4 @@
-let bypassCacheDefaultSetting = { 'bypassCacheOption': true };
+let bypassCacheDefaultSetting = { 'bypassCacheOption': false };
 
 function setDefaults() {
 	chrome.storage.local.set(bypassCacheDefaultSetting);
