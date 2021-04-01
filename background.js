@@ -2,7 +2,11 @@ let bypassCacheDefaultSetting = { 'bypassCacheOption': false };
 
 function setDefaults() {
 	chrome.storage.local.set(bypassCacheDefaultSetting);
-	console.log('Default cache bypass setting set to \'%s\'', bypassCacheDefaultSetting['bypassCacheOption'])
+	chrome.storage.local.get(['bypassCacheOption'],
+		function (setting) {
+			console.log('Default cache bypass setting set to \'%s\'', setting.bypassCacheOption)
+		}
+	)
 }
 
 function refreshAll() {
