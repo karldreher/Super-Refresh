@@ -23,6 +23,11 @@
       "description": "Refresh all the tabs!"
     }
   },
+  "options_ui":{
+    "page": "options.html",
+    "open_in_tab": false
+    
+  },
   "permissions": [
     "tabs",
     "storage"

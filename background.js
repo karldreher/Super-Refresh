@@ -26,6 +26,7 @@ function getOptions(callback) {
 
 function refreshAll() {
 	getOptions(function (extensionOptions) {
+		
 		let queryoptions = { currentWindow: true, audible: extensionOptions.queryAudibleTabs }
 		let reloadProperties = { bypassCache: extensionOptions.bypassCache }
 
