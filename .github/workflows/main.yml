@@ -67,5 +67,3 @@ jobs:
       with:
         name: ${{needs.manifestinfo.outputs.name}}-${{needs.manifestinfo.outputs.version}}
         path: export/
-
-        
