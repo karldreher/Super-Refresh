@@ -16,6 +16,7 @@ jobs:
     outputs: 
       version: ${{ steps.ExtensionVersion.outputs.version }}
       name: ${{ steps.ExtensionName.outputs.name }}
+      sizes: ${{ steps.IconSizes.outputs.sizes }}
     
     steps:
       - id: checkout
@@ -34,6 +35,13 @@ jobs:
           jq -r .name manifest.json
           value=$(jq -r .name manifest.json | sed 's/ /-/')
           echo "::set-output name=name::$value"
+
+      - id: IconSizes
+        name: Get Icon Sizes
+        run: |
+          jq .icons manifest.json | jq 'keys | .[]'
+          sizes=$(jq .icons manifest.json | jq 'keys | .[]')
+          echo "::set-output name=name::$sizes"
 
   build:
     name: Build Extension
