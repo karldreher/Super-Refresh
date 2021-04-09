@@ -40,7 +40,7 @@ jobs:
         name: Get Icon Sizes
         run: |
           jq .icons manifest.json | jq 'keys | .[]'
-          sizes=$(jq .icons manifest.json | jq 'keys | .[]')
+          sizes=$(jq .icons manifest.json | jq 'keys | .[]' | base64)
           echo "::set-output name=name::$sizes"
 
   build:
