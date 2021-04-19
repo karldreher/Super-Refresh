@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Super-Refresh</title>
+    <style type=text/css>
+        body {
+            margin: 20px
+        }
+
+        select {
+            margin-bottom: 10px;
+        }
+
+        button {
+            float: right;
+            margin-bottom: 10px;
+            margin-right: 10px;
+        }
+
+        td {
+            vertical-align: middle;
+
+        }
+    </style>
+</head>
+
+<body>
+    <table>
+        <tr>
+            <td>
+                Include tabs with audio?
+            </td>
+            <td>
+                <select id="audible">
+                    <option value="On">On</option>
+                    <option value="Off">Off</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Always refresh ignoring cache?
+
+            </td>
+            <td>
+                <select id="bypasscache">
+                    <option value="On">On</option>
+                    <option value="Off">Off</option>
+                </select>
+            </td>
+
+        </tr>
+    </table>
+
+    <button id="save">Save</button>
+    <div id="status"></div>
+    <script src="options.js"></script>
+</body>
+
+</html>
