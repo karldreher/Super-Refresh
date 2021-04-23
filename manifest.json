@@ -28,7 +28,6 @@
     "open_in_tab": false
   },
   "permissions": [
-    "tabs",
     "storage"
   ]
 }
