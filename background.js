@@ -33,27 +33,23 @@ function getOptions(callback) {
 function refreshAll() {
 	getOptions(function (extensionOptions) {
 
-		let queryoptions = { currentWindow: true, active: extensionOptions.includeActiveTab }
+		let queryoptions = { currentWindow: true }
 		let reloadProperties = { bypassCache: extensionOptions.bypassCache }
 
 		chrome.tabs.query(queryoptions,
 			function (tabs) {
+				if (extensionOptions.refreshAudibleTabs == false) {
+					tabs = tabs.filter(tab=>tab.audible != true)
+				}
+				if (extensionOptions.includeActiveTab == false) {
+					tabs = tabs.filter(tab=>tab.active != true)
+				}
 				for (i of tabs) {
-					if (extensionOptions.refreshAudibleTabs == false) {
-						//condition for refreshing only inaudible tabs, when the audible setting is set to false.
-						if (i.audible == false) {
-							chrome.tabs.reload(i.id, reloadProperties, console.log("refreshed tab id:" + i.id))
-						}
-					}
-					else {
-						//if audible setting is true, refresh all tabs without restriction
-						chrome.tabs.reload(i.id, reloadProperties, console.log("refreshed tab id:" + i.id))
-					}
+					chrome.tabs.reload(i.id, reloadProperties, console.log("refreshed tab id:" + i.id))
 				}
 			}
 		)
-	}
-	)
+	})
 }
 
 
