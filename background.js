@@ -1,11 +1,19 @@
 let bypassCacheDefaultSetting = { 'bypassCache': false };
+let includeActiveTabDefaultSetting = { 'includeActiveTab': true }
 let refreshAudibleTabsSetting = { 'refreshAudibleTabs': false }
+
 
 function setDefaults() {
 	chrome.storage.local.set(bypassCacheDefaultSetting);
 	chrome.storage.local.get(['bypassCache'],
 		function (setting) {
 			console.log('Default cache bypass setting set to \'%s\'', setting.bypassCache)
+		}
+	);
+	chrome.storage.local.set(includeActiveTabDefaultSetting);
+	chrome.storage.local.get(['includeActiveTab'],
+		function (setting) {
+			console.log('Default include active tab setting set to \'%s\'', setting.includeActiveTab)
 		}
 	);
 	chrome.storage.local.set(refreshAudibleTabsSetting);
@@ -27,7 +35,7 @@ function getOptions(callback) {
 function refreshAll() {
 	getOptions(function (extensionOptions) {
 
-		let queryoptions = { currentWindow: true }
+		let queryoptions = { currentWindow: true, active: extensionOptions.includeActiveTab }
 		let reloadProperties = { bypassCache: extensionOptions.bypassCache }
 
 		chrome.tabs.query(queryoptions,
