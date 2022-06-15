@@ -1,9 +1,7 @@
-let bypassCacheDefaultSetting = { 'bypassCache': false };
-let includeActiveTabDefaultSetting = { 'includeActiveTab': true }
-let refreshAudibleTabsSetting = { 'refreshAudibleTabs': false }
-
-
 function setDefaults() {
+	let bypassCacheDefaultSetting = { 'bypassCache': false };
+	let includeActiveTabDefaultSetting = { 'includeActiveTab': true }
+	let refreshAudibleTabsSetting = { 'refreshAudibleTabs': false }
 	chrome.storage.local.set(bypassCacheDefaultSetting);
 	chrome.storage.local.get(['bypassCache'],
 		function (setting) {
