@@ -5,7 +5,8 @@
     <title>Super-Refresh</title>
     <style type=text/css>
         body {
-            margin: 20px
+            margin: 20px;
+            height: 400px;
         }
 
         select {
@@ -40,8 +41,18 @@
         </tr>
         <tr>
             <td>
+                Include active tab?
+            </td>
+            <td>
+                <select id="includeActiveTab">
+                    <option value="On">On</option>
+                    <option value="Off">Off</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>
                 Always refresh ignoring cache?
-
             </td>
             <td>
                 <select id="bypasscache">
@@ -49,7 +60,6 @@
                     <option value="Off">Off</option>
                 </select>
             </td>
-
         </tr>
     </table>
 

@@ -15,9 +15,11 @@ function bool_to_html(bool) {
 
 function save_options() {
     var bypassCacheSetting = html_val_to_bool(document.getElementById('bypasscache').value);
+    var includeActiveTabSetting = html_val_to_bool(document.getElementById('includeActiveTab').value);
     var refreshAudibleTabsSetting = html_val_to_bool(document.getElementById('audible').value);
     chrome.storage.local.set({
         bypassCache: bypassCacheSetting,
+        includeActiveTab: includeActiveTabSetting,
         refreshAudibleTabs: refreshAudibleTabsSetting
     }, function () {
         // Update status to let user know options were saved.
@@ -25,13 +27,14 @@ function save_options() {
         status.textContent = 'Options saved.';
         setTimeout(function () {
             status.textContent = '';
-        }, 750);
+        }, 1500);
     });
 }
 
 function restore_options() {
     chrome.storage.local.get(null, function (items) {
         document.getElementById('bypasscache').value = bool_to_html(items.bypassCache);
+        document.getElementById('includeActiveTab').value = bool_to_html(items.includeActiveTab);
         document.getElementById('audible').value = bool_to_html(items.refreshAudibleTabs);
     });
 }
