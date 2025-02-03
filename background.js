@@ -53,7 +53,7 @@ function refreshAll() {
 
 chrome.runtime.onInstalled.addListener(setDefaults);
 
-chrome.browserAction.onClicked.addListener(refreshAll);
+chrome.action.onClicked.addListener(refreshAll);
 
 chrome.commands.onCommand.addListener(refreshAll)
 
