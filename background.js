@@ -2,12 +2,12 @@ let bypassCacheDefaultSetting = { bypassCache: false }
 let refreshAudibleTabsSetting = { refreshAudibleTabs: false }
 
 function setDefaults() {
-  chrome.storage.local.set(bypassCacheDefaultSetting)
-  chrome.storage.local.get(['bypassCache'], function (setting) {
+  chrome.storage.sync.set(bypassCacheDefaultSetting)
+  chrome.storage.sync.get(['bypassCache'], function (setting) {
     console.log("Default cache bypass setting set to '%s'", setting.bypassCache)
   })
-  chrome.storage.local.set(refreshAudibleTabsSetting)
-  chrome.storage.local.get(['refreshAudibleTabs'], function (setting) {
+  chrome.storage.sync.set(refreshAudibleTabsSetting)
+  chrome.storage.sync.get(['refreshAudibleTabs'], function (setting) {
     console.log(
       "Default audible tab refresh setting set to '%s'",
       setting.refreshAudibleTabs
@@ -16,7 +16,7 @@ function setDefaults() {
 }
 
 function getOptions(callback) {
-  chrome.storage.local.get(null, function (localStorageItems) {
+  chrome.storage.sync.get(null, function (localStorageItems) {
     callback(localStorageItems)
   })
 }
