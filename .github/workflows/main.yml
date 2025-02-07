@@ -68,8 +68,8 @@ jobs:
         mkdir export
         cd export
         cp ../icons/*.png .
-        cp ../*.js* .
-        cp ../*.html .
+        cp ../src/*.js* .
+        cp ../src/*.html .
 
     - id: publish-artifact
       name: Artifact Upload
