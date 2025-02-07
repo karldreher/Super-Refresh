@@ -7,9 +7,8 @@ function html_val_to_bool(value) {
 
 function bool_to_html(bool) {
     //see comments for html_val_to_bool.
-    if (bool == true) { value = "On" }
-    else if (bool == false) { value = "Off" }
-    return value
+    if (bool == true) { return "On" }
+    else if (bool == false) { return "Off" }
 }
 
 
