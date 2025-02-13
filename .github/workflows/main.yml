@@ -25,24 +25,24 @@ jobs:
       - id: ExtensionVersion
         name: Get Extension Version
         run: |
-          value=$(jq -r .version manifest.json)
+          value=$(jq -r .version src/manifest.json)
           echo "version=$value" >> $GITHUB_OUTPUT
 
       - id: ExtensionName
         name: Get Extension Name
         run: |
-          value=$(jq -r .name manifest.json | sed 's/ /-/')
+          value=$(jq -r .name src/manifest.json | sed 's/ /-/')
           echo "name=$value" >> $GITHUB_OUTPUT
 
       - id: IconSizes
         name: Get Icon Sizes
         run: |
-          sizes=$(jq -r '.icons | keys | map(tonumber) | sort | join(" ")' manifest.json)
+          sizes=$(jq -r '.icons | keys | map(tonumber) | sort | join(" ")' src/manifest.json)
           echo "sizes=$sizes" >> $GITHUB_OUTPUT
 
   build:
     name: Build Extension
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-24.04
     needs: manifestinfo
     steps:
     - id: checkout
