@@ -1,3 +1,5 @@
+import '@types/chrome'
+
 let bypassCacheDefaultSetting = { bypassCache: false }
 let refreshAudibleTabsSetting = { refreshAudibleTabs: false }
 
@@ -27,22 +29,20 @@ function refreshAll() {
     let reloadProperties = { bypassCache: extensionOptions.bypassCache }
 
     chrome.tabs.query(queryoptions, function (tabs) {
-      for (i of tabs) {
+      for (let i of tabs) {
         if (extensionOptions.refreshAudibleTabs == false) {
           //condition for refreshing only inaudible tabs, when the audible setting is set to false.
           if (i.audible == false) {
-            chrome.tabs.reload(
-              i.id,
-              reloadProperties,
+            chrome.tabs.reload(i.id!, reloadProperties, () => {
               console.log('refreshed tab id:' + i.id)
-            )
+            })
           }
         } else {
           //if audible setting is true, refresh all tabs without restriction
           chrome.tabs.reload(
-            i.id,
+            i.id!,
             reloadProperties,
-            console.log('refreshed tab id:' + i.id)
+            () => console.log('refreshed tab id:' + i.id)
           )
         }
       }

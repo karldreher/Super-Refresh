@@ -1,0 +1,15 @@
+{
+  "name": "super-refresh",
+  "version": "2.0.0",
+  "description": "Refresh all the tabs!",
+  "main": "",
+  "scripts": {
+    "build": "npx tsc src/background.ts"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/chrome": "^0.0.304",
+    "typescript": "^5.7.3"
+  }
+}
