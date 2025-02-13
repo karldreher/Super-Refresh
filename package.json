@@ -4,7 +4,9 @@
   "description": "Refresh all the tabs!",
   "main": "",
   "scripts": {
-    "build": "npx tsc src/*.ts"
+    "prebuild": "rm -rf dist && mkdir dist",
+    "build": "npx tsc src/*.ts --outDir dist",
+    "postbuild": "cp src/* dist/ && cp icons/*.png dist/ && rm dist/*.ts"
   },
   "author": "",
   "license": "ISC",

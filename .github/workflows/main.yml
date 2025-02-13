@@ -49,6 +49,7 @@ jobs:
       uses: actions/checkout@v4
 
     - id: icons
+      # TODO: Move to a node.js script
       name: Create Icon Set
       run: |
         imagesizes="${{needs.manifestinfo.outputs.sizes}}"
@@ -62,18 +63,9 @@ jobs:
         done
       working-directory: ./icons
 
-    - id: build
-      name: Collect Extension Files
-      run: |
-        mkdir export
-        cd export
-        cp ../icons/*.png .
-        cp ../src/*.js* .
-        cp ../src/*.html .
-
     - id: publish-artifact
       name: Artifact Upload
       uses: actions/upload-artifact@v4
       with:
         name: ${{needs.manifestinfo.outputs.name}}-${{needs.manifestinfo.outputs.version}}
-        path: export/
+        path: dist/
