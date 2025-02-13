@@ -48,6 +48,10 @@ jobs:
     - id: checkout
       uses: actions/checkout@v4
 
+    - id: install
+      name: Install Dependencies
+      run: sudo apt install libpng-dev libjpeg-dev libtiff-dev imagemagick
+
     - id: icons
       # TODO: Move to a node.js script
       name: Create Icon Set
