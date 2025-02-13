@@ -1,5 +1,8 @@
+//TODO broken, it shouldn't be a type import, it should be a real import (from something)
 import '@types/chrome'
 
+// oh my goodness https://github.com/microsoft/TypeScript/issues/14351#issuecomment-283367126
+export = 0
 let bypassCacheDefaultSetting = { bypassCache: false }
 let refreshAudibleTabsSetting = { refreshAudibleTabs: false }
 
