@@ -48,15 +48,6 @@ jobs:
     - id: checkout
       uses: actions/checkout@v4
 
-    - id: setup-node
-      uses: actions/setup-node@v4
-      with:
-        node-version-file: .nvmrc
-    
-    - run: npm install
-
-    - run: npm run build
-
     - name: Install Dependencies
       run: sudo apt install libpng-dev libjpeg-dev libtiff-dev imagemagick
 
@@ -74,6 +65,15 @@ jobs:
           convert icon-128.png -resize ${i}x${i} icon-${i}.png
         done
       working-directory: ./icons
+
+    - id: setup-node
+      uses: actions/setup-node@v4
+      with:
+        node-version-file: .nvmrc
+    
+    - run: npm install
+
+    - run: npm run build
 
     - id: publish-artifact
       name: Artifact Upload
