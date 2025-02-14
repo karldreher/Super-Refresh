@@ -1,12 +1,8 @@
-//TODO broken, it shouldn't be a type import, it should be a real import (from something)
-import '@types/chrome'
-
-// oh my goodness https://github.com/microsoft/TypeScript/issues/14351#issuecomment-283367126
-export = 0
 let bypassCacheDefaultSetting = { bypassCache: false }
 let refreshAudibleTabsSetting = { refreshAudibleTabs: false }
 
 function setDefaults() {
+
   chrome.storage.sync.set(bypassCacheDefaultSetting)
   chrome.storage.sync.get(['bypassCache'], function (setting) {
     console.log("Default cache bypass setting set to '%s'", setting.bypassCache)
