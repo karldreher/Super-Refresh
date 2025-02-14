@@ -5,7 +5,7 @@ function html_val_to_bool(value: string): boolean {
   } else if (value == 'Off') {
     return false
   }
-  // Absolutely no reason we should ever get here. 
+  // Absolutely no reason we should ever get here.
   return false
 }
 
@@ -44,13 +44,16 @@ function save_options() {
 }
 
 function restore_options() {
+  //TODO: Type Me (items)
   chrome.storage.local.get(null, function (items) {
-    document.getElementById('bypasscache')!.textContent = bool_to_html(
-      items.bypassCache
-    )
-    document.getElementById('audible')!.textContent = bool_to_html(
-      items.refreshAudibleTabs
-    )
+    let htmlBypassCacheSelect = document.getElementById(
+      'bypasscache'
+    ) as HTMLSelectElement
+    htmlBypassCacheSelect.value = bool_to_html(items.bypassCache)
+
+    let htmlAudibleSelect = document.getElementById('audible') as HTMLSelectElement
+    htmlAudibleSelect.value = bool_to_html(items.refreshAudibleTabs)
+
   })
 }
 document.addEventListener('DOMContentLoaded', restore_options)
