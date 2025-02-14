@@ -16,13 +16,14 @@ function setDefaults() {
   })
 }
 
-function getOptions(callback) {
+function getOptions(callback: Function) {
   chrome.storage.sync.get(null, function (localStorageItems) {
     callback(localStorageItems)
   })
 }
 
 function refreshAll() {
+  //TODO Type Me, need to create an interface for the extension options
   getOptions(function (extensionOptions) {
     let queryoptions = { currentWindow: true }
     let reloadProperties = { bypassCache: extensionOptions.bypassCache }
