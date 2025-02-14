@@ -16,25 +16,29 @@
 </head>
 
 <body>
-
+<h1>Super-Refresh Options</h1>
+<div style="display: flex; align-items: center; gap: 10px;">
     <h2>Include tabs with audio?</h2>
 
     <select id="audible">
         <option value="On">On</option>
         <option value="Off">Off</option>
     </select>
+</div>
 
+<div style="display: flex; align-items: center; gap: 10px;">
     <h2>Always refresh ignoring cache?</h2>
     <select id="bypasscache">
         <option value="On">On</option>
         <option value="Off">Off</option>
     </select>
-
-    <br>
-    <br>
-    
+</div>
+<div>
     <button id="save">Save</button>
+</div>
+    <!-- Empty div for adding status on save. -->
     <div id="status"></div>
+    <!-- Load the actual javascript which causes the page to function. -->
     <script src="options.js"></script>
 </body>
 
