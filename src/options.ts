@@ -21,13 +21,14 @@ function bool_to_html(bool: boolean): string {
 }
 
 function save_options() {
+  
   var bypassCacheSetting = html_val_to_bool(
-    document.getElementById('bypasscache')!.textContent!
+    (document.getElementById('bypasscache') as HTMLSelectElement).value
   )
   var refreshAudibleTabsSetting = html_val_to_bool(
-    document.getElementById('audible')!.textContent!
+    (document.getElementById('audible') as HTMLSelectElement).value
   )
-  chrome.storage.local.set(
+  chrome.storage.sync.set(
     {
       bypassCache: bypassCacheSetting,
       refreshAudibleTabs: refreshAudibleTabsSetting,
@@ -45,7 +46,7 @@ function save_options() {
 
 function restore_options() {
   //TODO: Type Me (items)
-  chrome.storage.local.get(null, function (items) {
+  chrome.storage.sync.get(null, function (items) {
     let htmlBypassCacheSelect = document.getElementById(
       'bypasscache'
     ) as HTMLSelectElement
