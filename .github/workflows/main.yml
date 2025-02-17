@@ -25,30 +25,34 @@ jobs:
       - id: ExtensionVersion
         name: Get Extension Version
         run: |
-          value=$(jq -r .version manifest.json)
+          value=$(jq -r .version src/manifest.json)
           echo "version=$value" >> $GITHUB_OUTPUT
 
       - id: ExtensionName
         name: Get Extension Name
         run: |
-          value=$(jq -r .name manifest.json | sed 's/ /-/')
+          value=$(jq -r .name src/manifest.json | sed 's/ /-/')
           echo "name=$value" >> $GITHUB_OUTPUT
 
       - id: IconSizes
         name: Get Icon Sizes
         run: |
-          sizes=$(jq -r '.icons | keys | map(tonumber) | sort | join(" ")' manifest.json)
+          sizes=$(jq -r '.icons | keys | map(tonumber) | sort | join(" ")' src/manifest.json)
           echo "sizes=$sizes" >> $GITHUB_OUTPUT
 
   build:
     name: Build Extension
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-24.04
     needs: manifestinfo
     steps:
     - id: checkout
       uses: actions/checkout@v4
 
+    - name: Install Dependencies
+      run: sudo apt install libpng-dev libjpeg-dev libtiff-dev imagemagick
+
     - id: icons
+      # TODO: Move to a node.js script
       name: Create Icon Set
       run: |
         imagesizes="${{needs.manifestinfo.outputs.sizes}}"
@@ -62,18 +66,18 @@ jobs:
         done
       working-directory: ./icons
 
-    - id: build
-      name: Collect Extension Files
-      run: |
-        mkdir export
-        cd export
-        cp ../icons/*.png .
-        cp ../*.js* .
-        cp ../*.html .
+    - id: setup-node
+      uses: actions/setup-node@v4
+      with:
+        node-version-file: .nvmrc
+    
+    - run: npm install
+
+    - run: npm run build
 
     - id: publish-artifact
       name: Artifact Upload
       uses: actions/upload-artifact@v4
       with:
         name: ${{needs.manifestinfo.outputs.name}}-${{needs.manifestinfo.outputs.version}}
-        path: export/
+        path: dist/

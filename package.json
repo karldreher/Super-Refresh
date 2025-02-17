@@ -1,0 +1,17 @@
+{
+  "name": "super-refresh",
+  "version": "2.0.0",
+  "description": "Refresh all the tabs!",
+  "main": "",
+  "scripts": {
+    "prebuild": "rm -rf dist && mkdir dist",
+    "build": "npx tsc src/*.ts --outDir dist",
+    "postbuild": "cp src/* dist/ && cp icons/*.png dist/ && rm dist/*.ts"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/chrome": "^0.0.304",
+    "typescript": "^5.7.3"
+  }
+}

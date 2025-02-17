@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Super Refresh",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Refresh all the tabs!  Click on the extension icon or use the keyboard shortcut to reload all open tabs in the current window.",
   "icons": {
     "16": "icon-16.png",
@@ -21,11 +21,6 @@
       "description": "Refresh all the tabs!"
     }
   },
-  "options_ui": {
-    "page": "options.html",
-    "open_in_tab": false
-  },
-  "permissions": [
-    "storage"
-  ]
+  "options_page": "options.html",
+  "permissions": ["storage"]
 }
